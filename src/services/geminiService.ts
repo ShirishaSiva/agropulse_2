@@ -1,8 +1,5 @@
 import { GoogleGenAI, Type } from "@google/genai";
 
-const API_KEY = process.env.GEMINI_API_KEY || "";
-const genAI = new GoogleGenAI({ apiKey: API_KEY });
-
 export interface AnalysisResult {
   immediateAction: {
     instruction: string;
@@ -29,6 +26,11 @@ export async function analyzeAgriculturalInput(
   weatherData?: any,
   marketData?: any
 ): Promise<AnalysisResult> {
+  const API_KEY = process.env.GEMINI_API_KEY || "";
+  if (!API_KEY) {
+    throw new Error("GEMINI_API_KEY is missing. Please add it to the Secrets panel.");
+  }
+  const genAI = new GoogleGenAI({ apiKey: API_KEY });
   const model = genAI.models.generateContent({
     model: "gemini-3.1-pro-preview",
     contents: [

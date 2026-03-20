@@ -14,10 +14,10 @@ export const ThreatMap: React.FC<ThreatMapProps> = ({ threats }) => {
 
   if (!hasValidKey) {
     return (
-      <div className="h-[300px] bg-stone-900 rounded-xl border-2 border-stone-800 flex items-center justify-center p-6 text-center">
+      <div className="h-[300px] bg-white dark:bg-stone-900/60 backdrop-blur-xl rounded-xl border-2 border-blue-200 dark:border-stone-800/50 flex items-center justify-center p-6 text-center transition-colors duration-500 shadow-xl">
         <div>
-          <p className="text-stone-500 text-sm font-bold uppercase tracking-widest mb-2">Map Offline</p>
-          <p className="text-stone-600 text-xs">Configure GOOGLE_MAPS_PLATFORM_KEY in Secrets to enable Threat Map.</p>
+          <p className="text-blue-600 dark:text-stone-500 text-sm font-black uppercase tracking-widest mb-2">Map Offline</p>
+          <p className="text-blue-800 dark:text-stone-600 text-xs font-bold">Configure GOOGLE_MAPS_PLATFORM_KEY in Secrets to enable Threat Map.</p>
         </div>
       </div>
     );
@@ -26,7 +26,7 @@ export const ThreatMap: React.FC<ThreatMapProps> = ({ threats }) => {
   const defaultCenter = threats[0]?.coordinates || { lat: 12.9716, lng: 77.5946 }; // Default to Bangalore or first threat
 
   return (
-    <div className="h-[400px] rounded-xl overflow-hidden border-2 border-stone-800 shadow-inner relative">
+    <div className="h-[400px] rounded-xl overflow-hidden border-2 border-blue-200 dark:border-stone-800 shadow-2xl relative transition-colors duration-500">
       <APIProvider apiKey={API_KEY} version="weekly">
         <Map
           defaultCenter={defaultCenter}
@@ -69,8 +69,8 @@ export const ThreatMap: React.FC<ThreatMapProps> = ({ threats }) => {
         </Map>
       </APIProvider>
       
-      <div className="absolute top-4 left-4 bg-stone-950/80 backdrop-blur border border-stone-800 px-3 py-1 rounded-full">
-        <span className="text-[10px] font-black text-stone-400 uppercase tracking-widest">Active Threat Radius</span>
+      <div className="absolute top-4 left-4 bg-white dark:bg-stone-950/80 backdrop-blur border border-blue-200 dark:border-stone-800 px-3 py-1 rounded-full transition-colors duration-500 shadow-md">
+        <span className="text-[10px] font-black text-blue-600 dark:text-stone-400 uppercase tracking-widest">Active Threat Radius</span>
       </div>
     </div>
   );

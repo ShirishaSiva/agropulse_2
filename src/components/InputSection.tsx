@@ -31,19 +31,19 @@ export const InputSection: React.FC<InputSectionProps> = ({ onAnalyze, isAnalyzi
   };
 
   return (
-    <div className="bg-stone-900 border-2 border-stone-800 rounded-2xl p-6 shadow-2xl">
-      <h2 className="text-stone-400 uppercase tracking-widest text-xs font-bold mb-4 flex items-center gap-2">
-        <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
+    <div className="bg-white dark:bg-stone-900/60 backdrop-blur-xl border-2 border-blue-200 dark:border-stone-800/50 rounded-2xl p-6 shadow-2xl transition-colors duration-500">
+      <h2 className="text-blue-600 dark:text-stone-400 uppercase tracking-widest text-xs font-bold mb-4 flex items-center gap-2">
+        <span className="w-2 h-2 bg-blue-600 dark:bg-emerald-500 rounded-full animate-pulse" />
         Input Bridge
       </h2>
       
       <div className="grid grid-cols-2 gap-4 mb-6">
         <button
           onClick={() => fileInputRef.current?.click()}
-          className="flex flex-col items-center justify-center gap-3 p-8 border-2 border-dashed border-stone-700 rounded-xl hover:border-emerald-500/50 hover:bg-emerald-500/5 transition-all group"
+          className="flex flex-col items-center justify-center gap-3 p-8 border-2 border-dashed border-blue-200 dark:border-stone-700/50 rounded-xl hover:border-blue-600/50 hover:bg-blue-50/50 transition-all group bg-blue-50/30 dark:bg-stone-950/30"
         >
-          <Camera className="w-8 h-8 text-stone-500 group-hover:text-emerald-500" />
-          <span className="text-sm font-bold text-stone-400 group-hover:text-emerald-400">Crop Photo</span>
+          <Camera className="w-8 h-8 text-blue-400 dark:text-stone-500 group-hover:text-blue-600 dark:group-hover:text-emerald-500" />
+          <span className="text-sm font-bold text-blue-600 dark:text-stone-400 group-hover:text-blue-700 dark:group-hover:text-emerald-400">Crop Photo</span>
           <input
             type="file"
             ref={fileInputRef}
@@ -56,10 +56,10 @@ export const InputSection: React.FC<InputSectionProps> = ({ onAnalyze, isAnalyzi
 
         <button
           onClick={() => audioInputRef.current?.click()}
-          className="flex flex-col items-center justify-center gap-3 p-8 border-2 border-dashed border-stone-700 rounded-xl hover:border-amber-500/50 hover:bg-amber-500/5 transition-all group"
+          className="flex flex-col items-center justify-center gap-3 p-8 border-2 border-dashed border-blue-200 dark:border-stone-700/50 rounded-xl hover:border-blue-600/50 hover:bg-blue-50/50 transition-all group bg-blue-50/30 dark:bg-stone-950/30"
         >
-          <Mic className="w-8 h-8 text-stone-500 group-hover:text-amber-500" />
-          <span className="text-sm font-bold text-stone-400 group-hover:text-amber-400">Radio/Voice</span>
+          <Mic className="w-8 h-8 text-blue-400 dark:text-stone-500 group-hover:text-blue-600 dark:group-hover:text-emerald-500" />
+          <span className="text-sm font-bold text-blue-600 dark:text-stone-400 group-hover:text-blue-700 dark:group-hover:text-emerald-400">Radio/Voice</span>
           <input
             type="file"
             ref={audioInputRef}
@@ -74,18 +74,18 @@ export const InputSection: React.FC<InputSectionProps> = ({ onAnalyze, isAnalyzi
       {files.length > 0 && (
         <div className="space-y-3 mb-6">
           {files.map((file, idx) => (
-            <div key={idx} className="flex items-center justify-between bg-stone-800/50 p-3 rounded-lg border border-stone-700">
+            <div key={idx} className="flex items-center justify-between bg-white dark:bg-stone-800/50 p-3 rounded-lg border border-blue-200 dark:border-stone-700">
               <div className="flex items-center gap-3">
                 {file.type === 'image' ? (
-                  <img src={file.data} className="w-10 h-10 rounded object-cover border border-stone-600" alt="preview" />
+                  <img src={file.data} className="w-10 h-10 rounded object-cover border border-blue-200 dark:border-stone-600" alt="preview" />
                 ) : (
-                  <div className="w-10 h-10 rounded bg-amber-500/20 flex items-center justify-center border border-amber-500/30">
-                    <Mic className="w-5 h-5 text-amber-500" />
+                  <div className="w-10 h-10 rounded bg-blue-600/20 flex items-center justify-center border border-blue-600/30">
+                    <Mic className="w-5 h-5 text-blue-600 dark:text-blue-500" />
                   </div>
                 )}
-                <span className="text-xs font-mono text-stone-300 truncate max-w-[150px]">{file.name}</span>
+                <span className="text-xs font-mono text-blue-700 dark:text-stone-300 truncate max-w-[150px]">{file.name}</span>
               </div>
-              <button onClick={() => removeFile(idx)} className="text-stone-500 hover:text-red-500">
+              <button onClick={() => removeFile(idx)} className="text-blue-400 hover:text-red-500">
                 <X className="w-4 h-4" />
               </button>
             </div>
@@ -99,8 +99,8 @@ export const InputSection: React.FC<InputSectionProps> = ({ onAnalyze, isAnalyzi
         className={cn(
           "w-full py-4 rounded-xl font-black uppercase tracking-tighter text-lg transition-all flex items-center justify-center gap-2",
           files.length === 0 || isAnalyzing
-            ? "bg-stone-800 text-stone-600 cursor-not-allowed"
-            : "bg-emerald-500 text-stone-950 hover:bg-emerald-400 active:scale-[0.98] shadow-[0_0_20px_rgba(16,185,129,0.3)]"
+            ? "bg-blue-100 dark:bg-stone-800 text-blue-300 dark:text-stone-600 cursor-not-allowed"
+            : "bg-blue-600 dark:bg-emerald-500 text-white dark:text-stone-950 hover:bg-blue-500 dark:hover:bg-emerald-400 active:scale-[0.98] shadow-[0_0_20px_rgba(37,99,235,0.3)]"
         )}
       >
         {isAnalyzing ? (
