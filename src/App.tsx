@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { InputSection } from './components/InputSection';
 import { FarmShieldDashboard } from './components/FarmShieldDashboard';
-import { analyzeAgriculturalInput, AnalysisResult } from './services/geminiService';
+import { AnalysisResult } from './types';
+import { analyzeImage } from './lib/api';
 import { Sprout, ShieldCheck, Info, AlertTriangle, RefreshCcw, Sun, Moon } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
@@ -27,11 +28,18 @@ export default function App() {
     setIsAnalyzing(true);
     setError(null);
     try {
-      const analysis = await analyzeAgriculturalInput(files);
+      // Find the first image file to send to the server
+      const imageFile = files.find(f => f.mimeType.startsWith('image/'));
+      
+      if (!imageFile) {
+        throw new Error("No image file provided for analysis.");
+      }
+
+      const analysis = await analyzeImage(imageFile);
       setResult(analysis);
     } catch (err) {
       console.error(err);
-      setError("Failed to bridge environmental noise. Check your connection and Gemini API key.");
+      setError(err instanceof Error ? err.message : "Failed to bridge environmental noise. Check your connection and Gemini API key.");
     } finally {
       setIsAnalyzing(false);
     }
