@@ -1,0 +1,9 @@
+{
+  "name": "AgroPulse",
+  "description": "A Gemini-powered Universal Bridge for small-scale farmers, converting environmental noise into life-saving agricultural actions.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ]
+}
